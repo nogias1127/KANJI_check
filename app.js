@@ -1,145 +1,184 @@
 const DEFAULT_KANJI = [
-  ['楽器', null],
-  ['倉庫', null],
-  ['巣', null],
-  ['覚ます', null],
-  ['働く', null],
-  ['失礼', null],
-  ['包まれる', null],
-  ['例えば', null],
-  ['名案', null],
-  ['続ける', null],
+  ['がっき', '楽器', null],
+  ['そうこ', '倉庫', null],
+  ['す', '巣', null],
+  ['さます', '覚ます', null],
+  ['はたらく', '働く', null],
+  ['しつれい', '失礼', null],
+  ['つつまれる', '包まれる', null],
+  ['たとえば', '例えば', null],
+  ['めいあん', '名案', null],
+  ['つづける', '続ける', null],
 
-  ['変化', null],
-  ['伝わる', null],
-  ['借りる', null],
-  ['直ちに', null],
-  ['求める', null],
-  ['記録', null],
-  ['自ら', null],
-  ['努力', null],
-  ['自然', null],
-  ['分類', null],
+  ['へんか', '変化', null],
+  ['つたわる', '伝わる', null],
+  ['かりる', '借りる', null],
+  ['ただちに', '直ちに', null],
+  ['もとめる', '求める', null],
+  ['きろく', '記録', null],
+  ['みずから', '自ら', null],
+  ['どりょく', '努力', null],
+  ['しぜん', '自然', null],
+  ['ぶんるい', '分類', null],
 
-  ['方法', null],
-  ['別', null],
-  ['参加', null],
-  ['芽', null],
-  ['司書', null],
-  ['辞典', null],
-  ['成り立ち', null],
-  ['説明', null],
-  ['連休', null],
-  ['筆順', null],
+  ['ほうほう', '方法', null],
+  ['べつ', '別', null],
+  ['さんか', '参加', null],
+  ['め', '芽', null],
+  ['ししょ', '司書', null],
+  ['じてん', '辞典', null],
+  ['なりたち', '成り立ち', null],
+  ['せつめい', '説明', null],
+  ['れんきゅう', '連休', null],
+  ['ひつじゅん', '筆順', null],
 
-  ['訓読み', null],
-  ['三種類', null],
-  ['便利', null],
-  ['治す', null],
-  ['観察', null],
-  ['実験', null],
-  ['好物', null],
-  ['飛び出す', null],
-  ['関係', null],
-  ['博物館', null],
+  ['くんよみ', '訓読み', null],
+  ['さんしゅるい', '三種類', null],
+  ['べんり', '便利', null],
+  ['なおす', '治す', null],
+  ['かんさつ', '観察', null],
+  ['じっけん', '実験', null],
+  ['こうぶつ', '好物', null],
+  ['とびだす', '飛び出す', null],
+  ['かんけい', '関係', null],
+  ['はくぶつかん', '博物館', null],
 
-  ['結果', null],
-  ['機会', null],
-  ['量', null],
-  ['熱湯', null],
-  ['清書', null],
-  ['漁船', null],
-  ['害虫', null],
-  ['材料', null],
-  ['完成', null],
-  ['約束', null],
+  ['けっか', '結果', null],
+  ['きかい', '機会', null],
+  ['りょう', '量', null],
+  ['ねっとう', '熱湯', null],
+  ['せいしょ', '清書', null],
+  ['ぎょせん', '漁船', null],
+  ['がいちゅう', '害虫', null],
+  ['ざいりょう', '材料', null],
+  ['かんせい', '完成', null],
+  ['やくそく', '約束', null],
 
-  ['席', null],
-  ['三位', null],
-  ['笑う', null],
-  ['特上', null],
-  ['焼く', null],
-  ['競泳', null],
-  ['初めて', null],
-  ['旗', null],
-  ['最も', null],
-  ['健康', null],
+  ['せき', '席', null],
+  ['さんい', '三位', null],
+  ['わらう', '笑う', null],
+  ['とくじょう', '特上', null],
+  ['やく', '焼く', null],
+  ['きょうえい', '競泳', null],
+  ['はじめて', '初めて', null],
+  ['はた', '旗', null],
+  ['もっとも', '最も', null],
+  ['けんこう', '健康', null],
 
-  ['上達', null],
-  ['成功', null],
-  ['失敗', null],
-  ['失望', null],
-  ['共感', null],
-  ['英語', null],
-  ['結末', null],
-  ['愛する', null],
-  ['悪天候', null],
-  ['折る', null],
+  ['じょうたつ', '上達', null],
+  ['せいこう', '成功', null],
+  ['しっぱい', '失敗', null],
+  ['しつぼう', '失望', null],
+  ['きょうかん', '共感', null],
+  ['えいご', '英語', null],
+  ['けつまつ', '結末', null],
+  ['あいする', '愛する', null],
+  ['あくてんこう', '悪天候', null],
+  ['おる', '折る', null],
 
-  ['目的', null],
-  ['必要', null],
-  ['印刷', null],
-  ['選ぶ', null],
-  ['舎', null],
-  ['覚える', null],
-  ['失う', null],
-  ['包そう紙', null],
-  ['例', null],
-  ['持続', null],
+  ['もくてき', '目的', null],
+  ['ひつよう', '必要', null],
+  ['いんさつ', '印刷', null],
+  ['えらぶ', '選ぶ', null],
+  ['しゃ', '舎', null],
+  ['おぼえる', '覚える', null],
+  ['うしなう', '失う', null],
+  ['ほうそうし', '包そう紙', null],
+  ['れい', '例', null],
+  ['じぞく', '持続', null],
 
-  ['伝記', null],
-  ['借用', null],
-  ['直ちに', null],
-  ['追求', null],
-  ['努める', null],
-  ['類まれ', null],
-  ['参る', null],
-  ['発芽', null],
-  ['説く', null],
-  ['連なる', null],
+  ['でんき', '伝記', null],
+  ['しゃくよう', '借用', null],
+  ['ただちに', '直ちに', null],
+  ['ついきゅう', '追求', null],
+  ['つとめる', '努める', null],
+  ['たぐいまれ', '類まれ', null],
+  ['まいる', '参る', null],
+  ['はつが', '発芽', null],
+  ['とく', '説く', null],
+  ['つらなる', '連なる', null],
 
-  ['便り', null],
-  ['好み', null],
-  ['明朝', null],
-  ['半ば', null],
-  ['絵画', null],
-  ['色紙', null],
-  ['広大', null],
-  ['的', null],
-  ['必ず', null],
-  ['選手', null]
+  ['たより', '便り', null],
+  ['このみ', '好み', null],
+  ['みょうちょう', '明朝', null],
+  ['なかば', '半ば', null],
+  ['かいが', '絵画', null],
+  ['しきし', '色紙', null],
+  ['こうだい', '広大', null],
+  ['まと', '的', null],
+  ['かならず', '必ず', null],
+  ['せんしゅ', '選手', null]
 ];
 
-const STORAGE_KEY = 'kanji-checker-list-v1';
-const WEAK_KEY = 'kanji-checker-weak-v1';
+const STORAGE_KEY = 'kanji-checker-list-v2';
+const WEAK_KEY = 'kanji-checker-weak-v2';
 
 const $ = (id) => document.getElementById(id);
+
 const drawCanvas = $('drawCanvas');
 const guideCanvas = $('guideCanvas');
+
 const dctx = drawCanvas.getContext('2d', { willReadFrequently: true });
 const gctx = guideCanvas.getContext('2d', { willReadFrequently: true });
 
 let kanjiList = loadKanjiList();
-let weakMap = JSON.parse(localStorage.getItem(WEAK_KEY) || '{}');
+let weakMap = loadWeakMap();
 let current = 0;
 let strokes = [];
 let activeStroke = null;
 let pointerId = null;
 
+function normalizeItem(item) {
+  if (Array.isArray(item)) {
+    if (item.length >= 3) {
+      return {
+        question: item[0] || item[1] || '',
+        char: item[1] || item[0] || '',
+        strokes: Number.isFinite(Number(item[2])) && Number(item[2]) > 0 ? Number(item[2]) : null
+      };
+    }
+
+    return {
+      question: item[0] || '',
+      char: item[0] || '',
+      strokes: Number.isFinite(Number(item[1])) && Number(item[1]) > 0 ? Number(item[1]) : null
+    };
+  }
+
+  return {
+    question: item.question || item.char || '',
+    char: item.char || item.question || '',
+    strokes: Number.isFinite(Number(item.strokes)) && Number(item.strokes) > 0 ? Number(item.strokes) : null
+  };
+}
+
 function loadKanjiList() {
   const saved = localStorage.getItem(STORAGE_KEY);
-  if (!saved) return DEFAULT_KANJI.map(([char, strokes]) => ({ char, strokes }));
+
+  if (!saved) {
+    return DEFAULT_KANJI.map(normalizeItem);
+  }
 
   try {
     const parsed = JSON.parse(saved);
-    if (Array.isArray(parsed) && parsed.length) return parsed;
+    if (Array.isArray(parsed) && parsed.length) {
+      return parsed.map(normalizeItem).filter(item => item.char);
+    }
   } catch (_) {}
 
-  return DEFAULT_KANJI.map(([char, strokes]) => ({ char, strokes }));
+  return DEFAULT_KANJI.map(normalizeItem);
 }
 
 function saveKanjiList() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(kanjiList));
+}
+
+function loadWeakMap() {
+  try {
+    return JSON.parse(localStorage.getItem(WEAK_KEY) || '{}');
+  } catch (_) {
+    return {};
+  }
 }
 
 function resizeCanvasForDPR(canvas) {
@@ -162,13 +201,13 @@ function setupCanvases() {
 }
 
 function currentItem() {
-  return kanjiList[current] || kanjiList[0];
+  return kanjiList[current] || kanjiList[0] || normalizeItem(DEFAULT_KANJI[0]);
 }
 
 function renderProblem() {
   const item = currentItem();
 
-  $('currentKanji').textContent = item.char;
+  $('currentKanji').textContent = item.question || item.char;
   $('currentIndex').textContent = `${current + 1} / ${kanjiList.length}`;
   $('expectedStrokes').textContent = item.strokes ? `目安画数：${item.strokes}` : '目安画数：未設定';
 
@@ -194,12 +233,14 @@ function drawGuide() {
 
   if (!$('showGuide').checked) return;
 
+  const item = currentItem();
+
   gctx.save();
   gctx.fillStyle = 'rgba(184, 95, 77, 0.025)';
   gctx.textAlign = 'center';
   gctx.textBaseline = 'middle';
 
-  const textLength = Array.from(currentItem().char).length;
+  const textLength = Array.from(item.char).length;
   const fontScale =
     textLength <= 1 ? 0.74 :
     textLength === 2 ? 0.42 :
@@ -209,7 +250,7 @@ function drawGuide() {
   const fontSize = Math.round(w * fontScale);
 
   gctx.font = `${fontSize}px "Hiragino Mincho ProN", "Yu Mincho", serif`;
-  gctx.fillText(currentItem().char, w / 2, h / 2 + w * 0.03);
+  gctx.fillText(item.char, w / 2, h / 2 + w * 0.03);
 
   gctx.restore();
 }
@@ -223,8 +264,13 @@ function redrawAll() {
   dctx.strokeStyle = '#222';
   dctx.lineWidth = Math.max(7, drawCanvas.width * 0.018);
 
-  for (const stroke of strokes) drawStroke(stroke);
-  if (activeStroke) drawStroke(activeStroke);
+  for (const stroke of strokes) {
+    drawStroke(stroke);
+  }
+
+  if (activeStroke) {
+    drawStroke(activeStroke);
+  }
 }
 
 function drawStroke(stroke) {
@@ -279,7 +325,9 @@ drawCanvas.addEventListener('pointermove', (event) => {
 function endStroke(event) {
   if (event.pointerId !== pointerId || !activeStroke) return;
 
-  if (activeStroke.length > 1) strokes.push(activeStroke);
+  if (activeStroke.length > 1) {
+    strokes.push(activeStroke);
+  }
 
   activeStroke = null;
   pointerId = null;
@@ -392,8 +440,13 @@ function overlapScore(drawCanvasMask, templateCanvas) {
   const w = drawCanvasMask.width;
   const h = drawCanvasMask.height;
 
-  const dData = drawCanvasMask.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
-  const tData = templateCanvas.getContext('2d', { willReadFrequently: true }).getImageData(0, 0, w, h).data;
+  const dData = drawCanvasMask
+    .getContext('2d', { willReadFrequently: true })
+    .getImageData(0, 0, w, h).data;
+
+  const tData = templateCanvas
+    .getContext('2d', { willReadFrequently: true })
+    .getImageData(0, 0, w, h).data;
 
   let intersection = 0;
   let union = 0;
@@ -502,7 +555,10 @@ function judge() {
     feedback.push('お手本との重なりが少なめです。部品の位置を見直しましょう。');
   }
 
-  const status = total >= (strict ? 82 : 78) ? 'good' : total >= (strict ? 62 : 58) ? 'warn' : 'bad';
+  const status =
+    total >= (strict ? 82 : 78) ? 'good' :
+    total >= (strict ? 62 : 58) ? 'warn' :
+    'bad';
 
   showResult(total, feedback, status);
 
@@ -529,11 +585,16 @@ function showResult(score, feedback, status) {
   $('feedbackList').innerHTML = feedback.map(item => `<li>${escapeHtml(item)}</li>`).join('');
 }
 
+function weakLabel(key) {
+  const found = kanjiList.find(item => item.char === key);
+  return found ? found.question || key : key;
+}
+
 function renderWeakList() {
   const entries = Object.entries(weakMap).sort((a, b) => b[1] - a[1]);
 
   $('weakList').innerHTML = entries.length
-    ? entries.map(([char, count]) => `<span class="weak-chip">${escapeHtml(char)} ${count}</span>`).join('')
+    ? entries.map(([char, count]) => `<span class="weak-chip">${escapeHtml(weakLabel(char))} ${count}</span>`).join('')
     : 'まだありません';
 }
 
@@ -565,36 +626,51 @@ function gotoIndex(index) {
 $('prevBtn').addEventListener('click', () => gotoIndex(current - 1));
 $('nextBtn').addEventListener('click', () => gotoIndex(current + 1));
 $('randomBtn').addEventListener('click', () => gotoIndex(Math.floor(Math.random() * kanjiList.length)));
+
 $('clearBtn').addEventListener('click', clearWriting);
+
 $('undoBtn').addEventListener('click', () => {
   strokes.pop();
   redrawAll();
   resetResult();
 });
+
 $('judgeBtn').addEventListener('click', judge);
 $('showGuide').addEventListener('change', drawGuide);
 $('strictMode').addEventListener('change', resetResult);
 
 $('settingsBtn').addEventListener('click', () => {
-  $('kanjiInput').value = kanjiList.map(k => `${k.char}${k.strokes ? ',' + k.strokes : ''}`).join('\n');
+  $('kanjiInput').value = kanjiList
+    .map(k => `${k.question || k.char},${k.char}${k.strokes ? ',' + k.strokes : ''}`)
+    .join('\n');
+
   $('settingsDialog').showModal();
 });
 
 $('saveListBtn').addEventListener('click', () => {
-  const rows = $('kanjiInput').value.split('\n').map(line => line.trim()).filter(Boolean);
+  const rows = $('kanjiInput').value
+    .split('\n')
+    .map(line => line.trim())
+    .filter(Boolean);
 
   const parsed = rows.map(line => {
-    const [charPart, strokePart] = line.split(',').map(s => s.trim());
-    const char = charPart || '';
-    const strokesNum = Number(strokePart);
+    const parts = line.split(',').map(s => s.trim());
+
+    const question = parts[0] || '';
+    const char = parts[1] || parts[0] || '';
+    const strokesNum = Number(parts[2]);
 
     return char
-      ? { char, strokes: Number.isFinite(strokesNum) && strokesNum > 0 ? strokesNum : null }
+      ? {
+          question,
+          char,
+          strokes: Number.isFinite(strokesNum) && strokesNum > 0 ? strokesNum : null
+        }
       : null;
   }).filter(Boolean);
 
   if (!parsed.length) {
-    alert('漢字を1つ以上入力してください。');
+    alert('出題を1つ以上入力してください。');
     return;
   }
 
@@ -609,13 +685,24 @@ $('saveListBtn').addEventListener('click', () => {
 });
 
 $('resetListBtn').addEventListener('click', () => {
-  kanjiList = DEFAULT_KANJI.map(([char, strokes]) => ({ char, strokes }));
-  saveKanjiList();
+  kanjiList = DEFAULT_KANJI.map(normalizeItem);
+  weakMap = {};
 
-  $('kanjiInput').value = kanjiList.map(k => `${k.char}${k.strokes ? ',' + k.strokes : ''}`).join('\n');
+  saveKanjiList();
+  localStorage.setItem(WEAK_KEY, JSON.stringify(weakMap));
+
+  $('kanjiInput').value = kanjiList
+    .map(k => `${k.question || k.char},${k.char}${k.strokes ? ',' + k.strokes : ''}`)
+    .join('\n');
+
+  current = 0;
+  clearWriting();
+  renderProblem();
 });
 
 window.addEventListener('resize', setupCanvases);
+
+$('showGuide').checked = false;
 
 setupCanvases();
 renderProblem();
