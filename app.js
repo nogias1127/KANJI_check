@@ -195,7 +195,7 @@ function drawGuide() {
   if (!$('showGuide').checked) return;
 
   gctx.save();
-  gctx.fillStyle = 'rgba(184, 95, 77, 0.12)';
+  gctx.fillStyle = 'rgba(184, 95, 77, 0.025)';
   gctx.textAlign = 'center';
   gctx.textBaseline = 'middle';
 
