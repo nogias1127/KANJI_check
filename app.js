@@ -1,14 +1,114 @@
 const DEFAULT_KANJI = [
-  ['一',1],['二',2],['三',3],['四',5],['五',4],['六',4],['七',2],['八',2],['九',2],['十',2],
-  ['百',6],['千',3],['日',4],['月',4],['火',4],['水',4],['木',4],['金',8],['土',3],['人',2],
-  ['子',3],['女',3],['男',7],['目',5],['口',3],['耳',6],['手',4],['足',7],['力',2],['気',6],
-  ['山',3],['川',3],['田',5],['林',8],['森',12],['空',8],['雨',8],['花',7],['草',9],['虫',6],
-  ['犬',4],['貝',7],['石',5],['竹',6],['糸',6],['車',7],['町',7],['村',7],['字',6],['文',4],
-  ['名',6],['年',6],['先',6],['生',5],['学',8],['校',10],['本',5],['休',6],['見',7],['入',2],
-  ['出',5],['立',5],['正',5],['早',6],['夕',3],['赤',7],['青',8],['白',5],['大',3],['小',3],
-  ['中',4],['上',3],['下',3],['左',5],['右',5],['円',4],['王',4],['玉',5],['音',9],['名',6],
-  ['春',9],['夏',10],['秋',9],['冬',5],['時',10],['分',4],['今',4],['毎',6],['週',11],['曜',18],
-  ['書',10],['読',14],['話',13],['聞',14],['計',9],['算',14],['答',12],['作',7],['考',6],['歩',8]
+const DEFAULT_KANJI = [
+  ['楽器', null],
+  ['倉庫', null],
+  ['巣', null],
+  ['覚ます', null],
+  ['働く', null],
+  ['失礼', null],
+  ['包まれる', null],
+  ['例えば', null],
+  ['名案', null],
+  ['続ける', null],
+
+  ['変化', null],
+  ['伝わる', null],
+  ['借りる', null],
+  ['直ちに', null],
+  ['求める', null],
+  ['記録', null],
+  ['自ら', null],
+  ['努力', null],
+  ['自然', null],
+  ['分類', null],
+
+  ['方法', null],
+  ['別', null],
+  ['参加', null],
+  ['芽', null],
+  ['司書', null],
+  ['辞典', null],
+  ['成り立ち', null],
+  ['説明', null],
+  ['連休', null],
+  ['筆順', null],
+
+  ['訓読み', null],
+  ['三種類', null],
+  ['便利', null],
+  ['治す', null],
+  ['観察', null],
+  ['実験', null],
+  ['好物', null],
+  ['飛び出す', null],
+  ['関係', null],
+  ['博物館', null],
+
+  ['結果', null],
+  ['機会', null],
+  ['量', null],
+  ['熱湯', null],
+  ['清書', null],
+  ['漁船', null],
+  ['害虫', null],
+  ['材料', null],
+  ['完成', null],
+  ['約束', null],
+
+  ['席', null],
+  ['三位', null],
+  ['笑う', null],
+  ['特上', null],
+  ['焼く', null],
+  ['競泳', null],
+  ['初めて', null],
+  ['旗', null],
+  ['最も', null],
+  ['健康', null],
+
+  ['上達', null],
+  ['成功', null],
+  ['失敗', null],
+  ['失望', null],
+  ['共感', null],
+  ['英語', null],
+  ['結末', null],
+  ['愛する', null],
+  ['悪天候', null],
+  ['折る', null],
+
+  ['目的', null],
+  ['必要', null],
+  ['印刷', null],
+  ['選ぶ', null],
+  ['舎', null],
+  ['覚える', null],
+  ['失う', null],
+  ['包そう紙', null],
+  ['例', null],
+  ['持続', null],
+
+  ['伝記', null],
+  ['借用', null],
+  ['直ちに', null],
+  ['追求', null],
+  ['努める', null],
+  ['類まれ', null],
+  ['参る', null],
+  ['発芽', null],
+  ['説く', null],
+  ['連なる', null],
+
+  ['便り', null],
+  ['好み', null],
+  ['明朝', null],
+  ['半ば', null],
+  ['絵画', null],
+  ['色紙', null],
+  ['広大', null],
+  ['的', null],
+  ['必ず', null],
+  ['選手', null]
 ];
 
 const STORAGE_KEY = 'kanji-checker-list-v1';
@@ -87,11 +187,13 @@ function drawGuide() {
   gctx.fillStyle = 'rgba(184, 95, 77, 0.12)';
   gctx.textAlign = 'center';
   gctx.textBaseline = 'middle';
-  const fontSize = Math.round(w * 0.74);
-  gctx.font = `${fontSize}px "Hiragino Mincho ProN", "Yu Mincho", serif`;
-  if ($('showGuide').checked) gctx.fillText(currentItem().char, w / 2, h / 2 + w * 0.03);
-  gctx.restore();
-}
+  const textLength = Array.from(currentItem().char).length;
+　const fontScale =
+  textLength <= 1 ? 0.74 :
+  textLength === 2 ? 0.42 :
+  textLength === 3 ? 0.31 :
+  0.24;
+const fontSize = Math.round(w * fontScale);
 
 function redrawAll() {
   resizeCanvasForDPR(drawCanvas);
@@ -182,7 +284,14 @@ function drawTemplateMask(char, width, height) {
   ctx.fillStyle = '#000';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.font = `${Math.round(width * 0.74)}px "Hiragino Mincho ProN", "Yu Mincho", serif`;
+  const textLength = Array.from(char).length;
+const fontScale =
+  textLength <= 1 ? 0.74 :
+  textLength === 2 ? 0.42 :
+  textLength === 3 ? 0.31 :
+  0.24;
+
+ctx.font = `${Math.round(width * fontScale)}px "Hiragino Mincho ProN", "Yu Mincho", serif`;
   ctx.fillText(char, width / 2, height / 2 + width * 0.03);
   return canvas;
 }
@@ -347,7 +456,7 @@ $('saveListBtn').addEventListener('click', () => {
   const rows = $('kanjiInput').value.split('\n').map(line => line.trim()).filter(Boolean);
   const parsed = rows.map(line => {
     const [charPart, strokePart] = line.split(',').map(s => s.trim());
-    const char = Array.from(charPart || '')[0];
+    const char = charPart || '';
     const strokesNum = Number(strokePart);
     return char ? { char, strokes: Number.isFinite(strokesNum) && strokesNum > 0 ? strokesNum : null } : null;
   }).filter(Boolean);
