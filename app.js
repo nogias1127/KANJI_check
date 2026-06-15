@@ -110,13 +110,14 @@ const DEFAULT_KANJI = [
   ['せんしゅ', '選手', null]
 ];
 
-const STORAGE_KEY = 'kanji-checker-list-v2';
-const WEAK_KEY = 'kanji-checker-weak-v2';
+const STORAGE_KEY = 'kanji-checker-list-v3';
+const WEAK_KEY = 'kanji-checker-weak-v3';
 
 const $ = (id) => document.getElementById(id);
 
 const drawCanvas = $('drawCanvas');
 const guideCanvas = $('guideCanvas');
+const canvasWrap = document.querySelector('.canvas-wrap');
 
 const dctx = drawCanvas.getContext('2d', { willReadFrequently: true });
 const gctx = guideCanvas.getContext('2d', { willReadFrequently: true });
@@ -161,6 +162,7 @@ function loadKanjiList() {
 
   try {
     const parsed = JSON.parse(saved);
+
     if (Array.isArray(parsed) && parsed.length) {
       return parsed.map(normalizeItem).filter(item => item.char);
     }
@@ -181,11 +183,45 @@ function loadWeakMap() {
   }
 }
 
+function currentItem() {
+  return kanjiList[current] || kanjiList[0] || normalizeItem(DEFAULT_KANJI[0]);
+}
+
+function answerChars(item = currentItem()) {
+  return Array.from(String(item.char || ''));
+}
+
+function boxCount(item = currentItem()) {
+  return Math.max(1, answerChars(item).length);
+}
+
+function updateCanvasLayout() {
+  const count = boxCount();
+  const parentWidth = canvasWrap.parentElement ? canvasWrap.parentElement.clientWidth : window.innerWidth;
+
+  const maxBoxWidth = 260;
+  const minBoxWidth = 96;
+  const sidePadding = 28;
+
+  const availableWidth = Math.max(minBoxWidth, parentWidth - sidePadding);
+  const availableHeight = Math.max(320, window.innerHeight * 0.68);
+
+  const boxSize = Math.floor(
+    Math.max(
+      minBoxWidth,
+      Math.min(maxBoxWidth, availableWidth, availableHeight / count)
+    )
+  );
+
+  canvasWrap.style.width = `${boxSize}px`;
+  canvasWrap.style.height = `${boxSize * count}px`;
+}
+
 function resizeCanvasForDPR(canvas) {
   const rect = canvas.getBoundingClientRect();
   const dpr = window.devicePixelRatio || 1;
-  const w = Math.round(rect.width * dpr);
-  const h = Math.round(rect.height * dpr);
+  const w = Math.max(1, Math.round(rect.width * dpr));
+  const h = Math.max(1, Math.round(rect.height * dpr));
 
   if (canvas.width !== w || canvas.height !== h) {
     canvas.width = w;
@@ -194,14 +230,11 @@ function resizeCanvasForDPR(canvas) {
 }
 
 function setupCanvases() {
+  updateCanvasLayout();
   resizeCanvasForDPR(drawCanvas);
   resizeCanvasForDPR(guideCanvas);
   redrawAll();
   drawGuide();
-}
-
-function currentItem() {
-  return kanjiList[current] || kanjiList[0] || normalizeItem(DEFAULT_KANJI[0]);
 }
 
 function renderProblem() {
@@ -211,6 +244,10 @@ function renderProblem() {
   $('currentIndex').textContent = `${current + 1} / ${kanjiList.length}`;
   $('expectedStrokes').textContent = item.strokes ? `目安画数：${item.strokes}` : '目安画数：未設定';
 
+  updateCanvasLayout();
+  resizeCanvasForDPR(drawCanvas);
+  resizeCanvasForDPR(guideCanvas);
+  redrawAll();
   drawGuide();
   resetResult();
 }
@@ -223,36 +260,62 @@ function resetResult() {
   renderWeakList();
 }
 
+function drawVerticalGrid(ctx, width, height, count) {
+  ctx.save();
+
+  ctx.strokeStyle = 'rgba(184, 95, 77, 0.22)';
+  ctx.lineWidth = Math.max(1, width * 0.004);
+
+  for (let i = 1; i < count; i++) {
+    const y = (height / count) * i;
+
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+  }
+
+  ctx.restore();
+}
+
+function drawVerticalChars(ctx, text, width, height, fillStyle) {
+  const chars = Array.from(String(text || ''));
+  const count = Math.max(1, chars.length);
+  const boxHeight = height / count;
+  const boxWidth = width;
+  const fontSize = Math.round(Math.min(boxWidth, boxHeight) * 0.74);
+
+  ctx.save();
+
+  ctx.fillStyle = fillStyle;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.font = `${fontSize}px "Hiragino Mincho ProN", "Yu Mincho", serif`;
+
+  chars.forEach((char, index) => {
+    const x = width / 2;
+    const y = boxHeight * index + boxHeight / 2 + fontSize * 0.03;
+    ctx.fillText(char, x, y);
+  });
+
+  ctx.restore();
+}
+
 function drawGuide() {
   resizeCanvasForDPR(guideCanvas);
 
+  const item = currentItem();
+  const count = boxCount(item);
   const w = guideCanvas.width;
   const h = guideCanvas.height;
 
   gctx.clearRect(0, 0, w, h);
 
+  drawVerticalGrid(gctx, w, h, count);
+
   if (!$('showGuide').checked) return;
 
-  const item = currentItem();
-
-  gctx.save();
-  gctx.fillStyle = 'rgba(184, 95, 77, 0.025)';
-  gctx.textAlign = 'center';
-  gctx.textBaseline = 'middle';
-
-  const textLength = Array.from(item.char).length;
-  const fontScale =
-    textLength <= 1 ? 0.74 :
-    textLength === 2 ? 0.42 :
-    textLength === 3 ? 0.31 :
-    0.24;
-
-  const fontSize = Math.round(w * fontScale);
-
-  gctx.font = `${fontSize}px "Hiragino Mincho ProN", "Yu Mincho", serif`;
-  gctx.fillText(item.char, w / 2, h / 2 + w * 0.03);
-
-  gctx.restore();
+  drawVerticalChars(gctx, item.char, w, h, 'rgba(184, 95, 77, 0.025)');
 }
 
 function redrawAll() {
@@ -380,6 +443,7 @@ function getBoundsFromImage(ctx, width, height) {
 
 function drawTemplateMask(char, width, height) {
   const canvas = document.createElement('canvas');
+
   canvas.width = width;
   canvas.height = height;
 
@@ -388,25 +452,14 @@ function drawTemplateMask(char, width, height) {
   ctx.fillStyle = '#fff';
   ctx.fillRect(0, 0, width, height);
 
-  ctx.fillStyle = '#000';
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-
-  const textLength = Array.from(char).length;
-  const fontScale =
-    textLength <= 1 ? 0.74 :
-    textLength === 2 ? 0.42 :
-    textLength === 3 ? 0.31 :
-    0.24;
-
-  ctx.font = `${Math.round(width * fontScale)}px "Hiragino Mincho ProN", "Yu Mincho", serif`;
-  ctx.fillText(char, width / 2, height / 2 + width * 0.03);
+  drawVerticalChars(ctx, char, width, height, '#000');
 
   return canvas;
 }
 
 function getDrawMask(width, height) {
   const canvas = document.createElement('canvas');
+
   canvas.width = width;
   canvas.height = height;
 
@@ -619,7 +672,9 @@ function clearWriting() {
 function gotoIndex(index) {
   current = (index + kanjiList.length) % kanjiList.length;
 
-  clearWriting();
+  strokes = [];
+  activeStroke = null;
+
   renderProblem();
 }
 
@@ -680,7 +735,9 @@ $('saveListBtn').addEventListener('click', () => {
   saveKanjiList();
   $('settingsDialog').close();
 
-  clearWriting();
+  strokes = [];
+  activeStroke = null;
+
   renderProblem();
 });
 
@@ -696,7 +753,9 @@ $('resetListBtn').addEventListener('click', () => {
     .join('\n');
 
   current = 0;
-  clearWriting();
+  strokes = [];
+  activeStroke = null;
+
   renderProblem();
 });
 
