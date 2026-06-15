@@ -21,11 +21,11 @@
       <div class="problem-head">
         <div>
           <p class="label">出題</p>
-          <div id="currentKanji" class="current-kanji">一</div>
+          <div id="currentKanji" class="current-kanji">がっき</div>
         </div>
         <div class="problem-meta">
           <span id="currentIndex">1 / 100</span>
-          <span id="expectedStrokes">目安画数：1</span>
+          <span id="expectedStrokes">目安画数：未設定</span>
         </div>
       </div>
 
@@ -36,7 +36,7 @@
       </div>
 
       <div class="check-options">
-        <label><input id="showGuide" type="checkbox" checked /> 薄いお手本を表示</label>
+        <label><input id="showGuide" type="checkbox" /> 薄いお手本を表示</label>
         <label><input id="strictMode" type="checkbox" /> きびしめ判定</label>
       </div>
     </section>
@@ -68,7 +68,7 @@
   <dialog id="settingsDialog">
     <form method="dialog" class="settings-card">
       <h2>漢字リスト設定</h2>
-      <p>1行につき「漢字,画数」で入力できます。画数が不明なら漢字だけでもOKです。</p>
+      <p>1行につき「よみ,正解,画数」で入力できます。画数が不明なら「よみ,正解」だけでOKです。</p>
       <textarea id="kanjiInput" spellcheck="false"></textarea>
       <div class="dialog-actions">
         <button id="resetListBtn" value="reset" type="button">初期リストに戻す</button>
